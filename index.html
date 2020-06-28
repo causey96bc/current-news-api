@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/wingcss" />
+    <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id="allItems">
+        <div class="container head-start">
+            <h1> FAKE NEWS!</h1>
+            <p>just kidding its all real</p>
+            <p>search what you want</p>
+        </div>
+
+        <form id="search">
+            <div class="container">
+                <div class="row">
+                    <fieldset class="col-4">
+                        <label for="keywords">Search by keywords</label>
+                        <input id="keywords" type="text" placeholder="enter keywords..." />
+                    </fieldset>
+                    <fieldset class="col-4">
+                        <label for="news-date">start Date</label>
+                        <input type="date" id="current-news-date" />
+                    </fieldset>
+                    <fieldset class="col-4">
+                        <label for="news-date">End Date</label>
+                        <input type="date" id="end-news-date" />
+
+                    </fieldset>
+                </div>
+                <div class="row nav-2">
+                    <fieldset class="col-3">
+                        <label for="select-categories">categories <span class="categories-count"></span></label>
+                        <select name="categories" id="select-categories">
+                            <option value="">Any</option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="col-3">
+                        <label for="select-regions">regions <span class="regions-count"></span></label>
+                        <select name="regions" id="select-regions">
+                            <option value="">Any</option>
+                        </select>
+                    </fieldset>
+                    <fieldset class="col-3">
+                        <label for="select-languages">languages <span class="languages-count"></span></label>
+                        <select name="languages" id="select-languages">
+                            <option value="">Any</option>
+                        </select>
+                        <!-- <p></p>Date: <input type="text" id="datepicker"></p> -->
+                    </fieldset>
+                    <fieldset class="col-3">
+                        <label>Submit search here</label>
+                        <button class="search-btn">SEARCH</button></fieldset>
+                </div>
+
+            </div>
+        </form>
+
+
+        <div class="container">
+            <header class="pagination">
+                <button class="previous">Previous</button>
+                <button class="next">Next</button>
+            </header>
+            <div class="row">
+                <div class="nav">
+                    <a class="tag nav-item" href="#" data-tag="general">latest-news</a>
+                    <a class="tag nav-item" href="#" data-tag="politics">politics</a>
+                    <a class="tag nav-item" href="#" data-tag="entertainment">Entertainment</a>
+                    <a class="tag nav-item" href="#" data-tag=science>science</a>
+                </div>
+            </div>
+
+            <div class="cards row">
+                <div class="card-body col">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

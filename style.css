@@ -1,0 +1,139 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none !important;
+    
+}
+#allItems{
+background-color: #659dbd;
+}
+.search-btn{
+    width: 90%;
+}
+input[type=date] {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 2px;
+    border: 1px solid #A4A4A4;
+    font-size: 1.3rem;
+    transition: all .2s ease;
+  }
+  input[type=date]:hover {
+    border: 1px solid #111;
+  }
+  input[type=date]:focus {
+    outline: 0;
+    border: 1px solid #104CFB;
+  }
+  input[type=date] {
+    padding: 1.1rem;
+  }
+.content .col{
+    overflow: hidden;
+}
+.content a{
+    padding: 0 0 30px;
+
+
+}
+.content h1{
+    padding-bottom: 10px;
+}
+.content p{
+    padding-bottom: 10px;
+}
+.content img{
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 600px;
+}
+.content a.image{
+text-align: center;
+display: block;
+}
+.renderNews{
+    border-bottom: 1px dashed grey;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: #fbeec1;
+}
+.renderNews img{
+    width: 100%;
+    height: auto;
+}
+
+.nav-1{
+    width: 100%;
+    display: grid;
+    height: 82px;
+    background: #659dbd;
+    line-height: initial;
+    z-index: 100;
+    top: 30;
+    left: 0;
+    letter-spacing: .25px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .01), 0 2px 10px 0 rgba(0, 0, 0, .13);
+
+
+
+}
+.nav-2{
+background: #659dbd;
+width: 100%;
+top: 82px;
+left: 0;
+z-index: 100;
+box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .01), 0 2px 10px 0 rgba(0, 0, 0, .13);
+padding-left: 10px;
+}
+.nav{
+align-content: center;
+width: 100%;
+height: 20px;
+background-color: #659dbd;
+justify-content: center;
+margin-bottom: 55px;
+margin: 0 auto;
+color: white;
+}
+.container .content{
+    display: inline;
+}
+.pagination{
+    text-align: center;
+    
+}
+.card-body{
+    overflow: hidden;
+
+} 
+ .head-start{
+     text-align: center;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     text-transform: capitalize;
+
+ }
+ .head-start p{
+font-size: 15px;
+ }
+ /* .head-start{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: relative;
+    animation-name: go;
+    animation-duration: 6s;
+    animation-delay: 2s;
+  }
+  
+  @keyframes go {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; right:100px; top:0px;}
+    50%  {background-color:blue; left:400px; top:00px;}
+    75%  {background-color:green; right:200px; top:0px;}
+    100% {background-color:red; left:0px; top:0px;}
+  } */
