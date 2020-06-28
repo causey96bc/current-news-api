@@ -1,17 +1,12 @@
-
+// global variables used throughout the app to help with readablity
 const baseUrl = 'https://api.currentsapi.services/v1'
 const dataPoints = {
     news: "latest-news",
     search: "search",
 }
 const languagesURL = 'available/languages'
-
 const categoriesURL = "available/categories"
 const regionsURL = "available/regions"
-
-
-
-
 const { news, search } = dataPoints
 const apiKey = 'apiKey=Bo7hfZr-BH4zac2-R6ItXfXwy6edgox_pFZVH-WQfut_eYNO'
 let urlStartDate = 'start_date=YYYY-MM-DD'
@@ -20,9 +15,6 @@ let newClassURL
 let pageNumber = 1
 let newURL
 let categorySearchQuery
-
-
-
 
 async function fetchAllCategories() {
     const categoryURL = `${baseUrl}/${categoriesURL}?${apiKey}`
@@ -33,14 +25,12 @@ async function fetchAllCategories() {
         const response = await fetch(categoryURL);
         const { categories } = await response.json();
         localStorage.setItem("categories", JSON.stringify(categories));
-        console.log(categories)
+
         return categories;
     } catch (error) {
         console.error(error);
     }
 }
-
-// fetchAllCategories(category).then(x => console.log(x))
 
 async function fetchAllLanguages() {
 
@@ -52,7 +42,6 @@ async function fetchAllLanguages() {
         const response = await fetch(languageURL);
         const { languages } = await response.json();
         localStorage.setItem("languages", JSON.stringify(languages));
-        console.log(languages)
         return languages;
     } catch (error) {
         console.error(error);
@@ -70,7 +59,6 @@ async function fetchAllRegions() {
         const response = await fetch(regionURL);
         const { regions } = await response.json();
         localStorage.setItem("regions", JSON.stringify(regions));
-        console.log(regions)
         return regions;
     } catch (error) {
         console.error(error);
@@ -89,9 +77,6 @@ async function fetchAllLists() {
             $("#select-categories").append(categoryHtml);
 
         });
-
-
-
         const regionArray = Object.entries(regions)
         $(".regions-count").text(`(${regionArray.length})`);
         regionArray.forEach((region) => {
@@ -114,7 +99,6 @@ async function fetchAllLists() {
           `);
             $("#select-languages").append(languagesHtml);
         });
-
     }
     catch (error) {
         console.error(error)
@@ -125,7 +109,8 @@ async function fetchAllLists() {
 
 
 
-
+// builds a sear h string based upon the api elements that need to be passed inside the url
+// it also will return two different strings based on whether a user passes in a keyword or not 
 function buildSearchString() {
     categorySearchQuery = {
         category: $("#select-categories").val(),
@@ -139,8 +124,6 @@ function buildSearchString() {
     let keyword = $("#keywords").val()
     let startDate = $("#current-news-date").val()
     let endDate = $("#end-news-date").val()
-    console.log("grab the motherfucker", categorySearchQuery)
-
     let searchQuery = Object.entries(categorySearchQuery)
         .map(function (line) {
             if (line != '') {
@@ -154,21 +137,15 @@ function buildSearchString() {
 
         newClassURL = `${baseUrl}/search?keyword=${keyword}&${apiKey}&start_date=${startDate}&end_date=${endDate}&page_number=1`
         newURL = `${baseUrl}/search?keyword=${keyword}&${apiKey}&page_number=`
-        console.log(newClassURL)
+
         return newClassURL
 
     } else {
-
-
         newClassURL = `${baseUrl}/latest-news?${encodeURI(searchQuery)}&${apiKey}&page_number=1`
         newURL = `${baseUrl}/latest-news?${encodeURI(searchQuery)}&${apiKey}&page_number=`
 
-        // categorySearchQuery.page_number++
-        console.log(newClassURL)
         return newClassURL;
     }
-
-
 }
 
 
@@ -213,9 +190,9 @@ function isCurrent(date) {
 }
 
 
-
+//updates my page so that the render card function will be displayed on search or on load
+// it also contains the logic for my next and previous buttons and diables them appropriately
 function updateCard(news) {
-
     const root = $(".cards")
     let results = root.find(".card-body").empty()
     $(".results").empty()
@@ -228,25 +205,20 @@ function updateCard(news) {
 }
 $(".pagination .next, .pagination .previous").on("click", async function () {
     onFetchStart();
-    // let nextNumber = categorySearchQuery.page_number++
-    // console.log("yo", nextNumberURL)
-    // let previousNumber = categorySearchQuery.page_number--
-    // console.log("this is here here", pageNumberURL)
     target = $(this).attr("class")
     if (target == "next") {
         pageNumber = Number(pageNumber) + 1
 
     } else if (target == "previous") {
         pageNumber = Number(pageNumber) - 1
-
-
     }
+    //targets the new url variable set inside my build search STRING and adds the page number to the new url string
+    // allowing the next and previous buttons to return a new url that is related to the search 
     try {
         let newResult = newURL + pageNumber
         const results = await fetch(newResult);
         const { news, status, page, date } = await results.json();
         updateCard(news, status, page, date);
-        console.log(newResult)
     } catch (error) {
         console.error(error);
     } finally {
@@ -254,15 +226,15 @@ $(".pagination .next, .pagination .previous").on("click", async function () {
     }
 })
 
-
+// calls the function build search string when a user clicks search
+// return data based upon the users inputs
 $("#search").on("submit", async function (event) {
     event.preventDefault();
     onFetchStart();
     try {
         const result = await fetch(buildSearchString());
         const { news, status, page, published } = await result.json();
-        //   updatePreview(records, info);
-        console.log(status, news, page)
+        c
         updateCard(news, page)
         isCurrent(published)
         return news, status
@@ -278,47 +250,29 @@ $("#search").on("submit", async function (event) {
     }
 });
 
-
+// grabs the tag class on click and returns data based upon the dat-tags information 
 $("#allItems").on("click", ".tag", async function () {
-
-
     try {
         let target = $(this).attr("data-tag")
         const tagURL = `${baseUrl}/latest-news?${apiKey}&category=${target}&page_number=1`
         const response = await fetch(tagURL)
         const { news, status, page } = await response.json()
-        console.log("this is clicked", target)
         updateCard(news, status, page)
-
     } catch (error) {
         console.error(error)
     }
-
-
-
 })
 
-
+// pre loads the page with the latest news articles when a user loads the app
 async function displayOnLoad() {
-
     try {
         const loadURL = `${baseUrl}/latest-news?${apiKey}&page_number=1`
         const response = await fetch(loadURL)
         const { news, status, page } = await response.json()
         updateCard(news, status, page)
-
-
     } catch (error) {
         console.error(error)
     }
-
-
-
-
 }
 displayOnLoad()
-
-
-
-
 fetchAllLists()
