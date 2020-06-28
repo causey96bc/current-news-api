@@ -132,7 +132,6 @@ function buildSearchString() {
         })
         .join("&");
 
-    console.log("query is here", searchQuery)
     if (keyword !== "") {
 
         newClassURL = `${baseUrl}/search?keyword=${keyword}&${apiKey}&start_date=${startDate}&end_date=${endDate}&page_number=1`
@@ -234,7 +233,7 @@ $("#search").on("submit", async function (event) {
     try {
         const result = await fetch(buildSearchString());
         const { news, status, page, published } = await result.json();
-        c
+
         updateCard(news, page)
         isCurrent(published)
         return news, status
